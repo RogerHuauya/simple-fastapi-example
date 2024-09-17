@@ -3,24 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books</title>
+    <title>Book Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .book-actions {
+            margin-top: 5px;
+        }
+        .book-actions a {
+            text-decoration: none;
+            color: #3498db;
+            margin-right: 10px;
+        }
+        .book-actions a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Books</h1>
-    <form action="/create" method="post">
-        <input type="text" name="title" placeholder="Book Title" required>
-        <input type="text" name="author" placeholder="Author" required>
-        <button type="submit">Add Book</button>
-    </form>
+    <div class="container">
+        <h1>Book Management System</h1>
+        <form action="/create" method="post">
+            <label for="title">Book Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter book title" required>
+            
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" placeholder="Enter author name" required>
+            
+            <button type="submit">Add Book</button>
+        </form>
 
-    <ul>
-        {% for book in books %}
-            <li>
-                <strong>{{ book.title }}</strong> by {{ book.author }}
-                <a href="/edit/{{ book.id }}">Edit</a> | 
-                <a href="/delete/{{ book.id }}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
+        <h2>Book List</h2>
+        <ul>
+            {% for book in books %}
+                <li>
+                    <strong>{{ book.title }}</strong> by {{ book.author }}
+                    <div class="book-actions">
+                        <a href="/edit/{{ book.id }}" aria-label="Edit {{ book.title }}">Edit</a>
+                        <a href="/delete/{{ book.id }}" aria-label="Delete {{ book.title }}">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
